@@ -9,10 +9,10 @@ let questions = [
 
 let index = 0;
 
-// Generate background stars
+// CREATE LOTS OF STARS 🌌
 const starsContainer = document.querySelector(".stars");
 
-for (let i = 0; i < 80; i++) {
+for (let i = 0; i < 200; i++) {
     const star = document.createElement("div");
     star.className = "star";
     star.style.top = Math.random() * 100 + "%";
@@ -26,15 +26,13 @@ function yesClicked() {
     sound.currentTime = 0;
     sound.play();
 
-    createFloatStar();
-
     index++;
     const q = document.getElementById("question");
 
     if (index < questions.length) {
         q.innerText = questions[index];
     } else {
-        q.innerText = "Yay! Friendship confirmed 🤝✨";
+        q.innerText = "FRIENDSHIP CONFIRMED 🤝";
         document.getElementById("yesBtn").style.display = "none";
         document.getElementById("noBtn").style.display = "none";
     }
@@ -43,14 +41,4 @@ function yesClicked() {
 function noClicked() {
     document.getElementById("question").innerText =
         "Hehe 😄 try saying Yes";
-}
-
-function createFloatStar() {
-    const star = document.createElement("div");
-    star.className = "float";
-    star.innerText = "⭐";
-    star.style.left = Math.random() * window.innerWidth + "px";
-    document.body.appendChild(star);
-
-    setTimeout(() => star.remove(), 4000);
 }
