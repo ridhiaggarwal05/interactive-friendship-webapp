@@ -1,20 +1,32 @@
+// Questions (friendship vibe only)
 let questions = [
-    "Will you be my friend forever? 🥺💖",
-    "Will you always stay the same? 💞",
-    "Will you still talk to me when I annoy you? 😜",
-    "Will you laugh at my bad jokes? 😂",
-    "Promise you won’t forget me ever? 🥹💗"
+    "Will you be my friend forever?🫂",
+    "Will you always stay constant?💙",
+    "Will you still talk to me if I yelled at you?👉👈",
+    "Can you make me eat pizza today?🍕",
+    "Promise you won’t leave me ever?🥺"
 ];
 
 let index = 0;
+
+// Generate background stars
+const starsContainer = document.querySelector(".stars");
+
+for (let i = 0; i < 80; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 2 + "s";
+    starsContainer.appendChild(star);
+}
 
 function yesClicked() {
     const sound = document.getElementById("yesSound");
     sound.currentTime = 0;
     sound.play();
 
-    createHeart();
-    createHeart();
+    createFloatStar();
 
     index++;
     const q = document.getElementById("question");
@@ -22,23 +34,23 @@ function yesClicked() {
     if (index < questions.length) {
         q.innerText = questions[index];
     } else {
-        q.innerText = "Yayyyy!! Besties forever 💕🥰✨";
+        q.innerText = "Yay! Friendship confirmed 🤝✨";
         document.getElementById("yesBtn").style.display = "none";
         document.getElementById("noBtn").style.display = "none";
     }
 }
 
 function noClicked() {
-    const q = document.getElementById("question");
-    q.innerText = "Hehe 🙈 wrong choice… try YES 💖";
+    document.getElementById("question").innerText =
+        "Hehe 😄 try saying Yes";
 }
 
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerText = "💖";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    document.body.appendChild(heart);
+function createFloatStar() {
+    const star = document.createElement("div");
+    star.className = "float";
+    star.innerText = "⭐";
+    star.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(star);
 
-    setTimeout(() => heart.remove(), 4000);
+    setTimeout(() => star.remove(), 4000);
 }
