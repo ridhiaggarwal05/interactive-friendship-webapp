@@ -1,4 +1,3 @@
-// Questions (friendship vibe only)
 let questions = [
     "Will you be my friend forever?🫂",
     "Will you always stay constant?💙",
@@ -9,36 +8,44 @@ let questions = [
 
 let index = 0;
 
-// CREATE LOTS OF STARS 🌌
-const starsContainer = document.querySelector(".stars");
+const starsBox = document.querySelector(".stars");
+const questionEl = document.getElementById("question");
 
-for (let i = 0; i < 200; i++) {
-    const star = document.createElement("div");
-    star.className = "star";
-    star.style.top = Math.random() * 100 + "%";
-    star.style.left = Math.random() * 100 + "%";
-    star.style.animationDelay = Math.random() * 2 + "s";
-    starsContainer.appendChild(star);
+/* CREATE STARS */
+for (let i = 0; i < 250; i++) {
+    const s = document.createElement("div");
+    s.className = "star";
+    s.style.top = Math.random() * 100 + "%";
+    s.style.left = Math.random() * 100 + "%";
+    starsBox.appendChild(s);
+}
+
+/* RESET + REPLAY QUESTION ANIMATION */
+function animateQuestion(text) {
+    questionEl.classList.remove("noEffect");
+    questionEl.style.animation = "none";
+    questionEl.offsetHeight; // reflow
+    questionEl.innerText = text;
+    questionEl.style.animation =
+        "questionReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards";
 }
 
 function yesClicked() {
-    const sound = document.getElementById("yesSound");
-    sound.currentTime = 0;
-    sound.play();
+    document.getElementById("yesSound").play();
+    document.body.classList.add("yes-mode");
 
     index++;
-    const q = document.getElementById("question");
-
     if (index < questions.length) {
-        q.innerText = questions[index];
+        animateQuestion(questions[index]);
     } else {
-        q.innerText = "FRIENDSHIP CONFIRMED 🤝";
+        animateQuestion("FRIENDSHIP CONFIRMED💙\n Chl ab pizza khila🙂‍↔️");
         document.getElementById("yesBtn").style.display = "none";
         document.getElementById("noBtn").style.display = "none";
     }
 }
 
 function noClicked() {
-    document.getElementById("question").innerText =
-        "Hehe 😄 try saying Yes";
+    document.body.classList.remove("yes-mode");
+    questionEl.classList.add("noEffect");
+    animateQuestion("Arey seriously?🤨");
 }
